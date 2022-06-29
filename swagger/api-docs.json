@@ -1,0 +1,394 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Hotel API's",
+        "description": "Hotel API's description"
+    },
+    "basePath": "/",
+    "tags": [{
+        "name": "Hotels",
+        "description": "Hotel actions"
+    }],
+    "schemes": ["http", "https"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/hotel/list": {
+            "post": {
+                "tags": [
+                    "Hotels"
+                ],
+                "summary": "Hotel List",
+                "description": "List of Hotels",
+                "operationId": "HotelList",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Created filter object",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/filter-objects"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Business Exception",
+                        "schema": {
+                            "$ref": "#/definitions/business_exception"
+                        }
+                    }
+                }
+            }
+        },
+        "/hotel/cheapest": {
+            "post": {
+                "tags": [
+                    "Hotels"
+                ],
+                "summary": "Cheapest Hotel List",
+                "description": "Hotel List based Filter",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Created cheapest filter object",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/cheapest-filter-objects"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Business Exception",
+                        "schema": {
+                            "$ref": "#/definitions/business_exception"
+                        }
+                    }
+                }
+            }
+        },
+        "/hotel/create": {
+            "post": {
+                "tags": [
+                    "Hotels"
+                ],
+                "description": "Create hotel details",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Hotel object",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/create-objects"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Business Exception",
+                        "schema": {
+                            "$ref": "#/definitions/business_exception"
+                        }
+                    }
+                }
+            }
+        },
+        "/hotel/update": {
+            "put": {
+                "tags": [
+                    "Hotels"
+                ],
+                "description": "Update hotel details",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Hotel update object",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/update-objects"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Business Exception",
+                        "schema": {
+                            "$ref": "#/definitions/business_exception"
+                        }
+                    }
+                }
+            }
+        },
+        "/hotel/delete": {
+            "delete": {
+                "tags": [
+                    "Hotels"
+                ],
+                "description": "Delete hotel",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Hotel object",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/delete-objects"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "400": {
+                        "description": "Business Exception",
+                        "schema": {
+                            "$ref": "#/definitions/business_exception"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "cheapest-filter-objects": {
+            "type": "object",
+            "properties": {
+                "booking_date": {
+                    "type": "object",
+                    "properties": {
+                        "from": {
+                            "type": "string",
+                            "description": "From date",
+                            "example": "2022-06-28 00:00:00"
+                        },
+                        "to": {
+                            "type": "string",
+                            "description": "To date",
+                            "example": "2022-06-28 12:00:00"
+                        }
+                    }
+                },
+                "rooms": {
+                    "type": "number",
+                    "description": "No.of rooms",
+                    "example": 1
+                },
+                "sharing": {
+                    "type": "number",
+                    "description": "No.of persons for room",
+                    "example": 2
+                },
+                "distance": {
+                    "type": "number",
+                    "description": "Distance in km",
+                    "example": 1
+                }
+            },
+            "xml": {
+                "name": "cheapest-filter-objects"
+            }
+        },
+        "filter-objects": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name Of The Hotel",
+                    "example": "Acrod"
+                },
+                "sharing": {
+                    "type": "number",
+                    "description": "No.of Sharing",
+                    "example": 2
+                },
+                "checkout": {
+                    "type": "number",
+                    "description": "Check Out Hours",
+                    "example": 24
+                },
+                "rent": {
+                    "type": "number",
+                    "description": "Rent",
+                    "example": 7000
+                },
+                "rooms": {
+                    "type": "number",
+                    "description": "Rooms",
+                    "example": 3
+                },
+                "distance": {
+                    "type": "number",
+                    "description": "Distance in km",
+                    "example": 10
+                }
+            },
+            "xml": {
+                "name": "filter-objects"
+            }
+        },
+        "create-objects": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name Of The Hotel",
+                    "example": "Acrod"
+                },
+                "sharing": {
+                    "type": "number",
+                    "description": "No.of Sharing",
+                    "example": 2
+                },
+                "checkout": {
+                    "type": "number",
+                    "description": "Check Out Hours",
+                    "example": 24
+                },
+                "rent": {
+                    "type": "number",
+                    "description": "Rent",
+                    "example": 7000
+                },
+                "rooms": {
+                    "type": "number",
+                    "description": "Rooms",
+                    "example": 3
+                },
+                "distance": {
+                    "type": "number",
+                    "description": "Distance in km",
+                    "example": 10
+                },
+                "discount": {
+                    "type": "number",
+                    "description": "Discount percentage",
+                    "example": 12
+                },
+                "amenities": {
+                    "type": "string",
+                    "description": "Amenities",
+                    "example": "Wifi, Swimming pool, Including Breakfast, Including Lunch, Including Dinner, Bar"
+                }
+            },
+            "xml": {
+                "name": "create-objects"
+            }
+        },
+        "update-objects": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Hotel Id",
+                    "example": 1
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name Of The Hotel",
+                    "example": "Acrod"
+                },
+                "sharing": {
+                    "type": "number",
+                    "description": "No.of Sharing",
+                    "example": 2
+                },
+                "checkout": {
+                    "type": "number",
+                    "description": "Check Out Hours",
+                    "example": 24
+                },
+                "rent": {
+                    "type": "number",
+                    "description": "Rent",
+                    "example": 7000
+                },
+                "rooms": {
+                    "type": "number",
+                    "description": "Rooms",
+                    "example": 3
+                },
+                "distance": {
+                    "type": "number",
+                    "description": "Distance in km",
+                    "example": 10
+                },
+                "discount": {
+                    "type": "number",
+                    "description": "Discount percentage",
+                    "example": 12
+                },
+                "amenities": {
+                    "type": "string",
+                    "description": "Amenities",
+                    "example": "Wifi, Swimming pool, Including Breakfast, Including Lunch, Including Dinner, Bar"
+                }
+            },
+            "xml": {
+                "name": "update-objects"
+            }
+        },
+        "delete-objects": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "number",
+                    "description": "Hotel Id",
+                    "example": 1
+                }
+            },
+            "xml": {
+                "name": "delete-objects"
+            }
+        },
+        "error": {
+            "type": "object",
+            "description": "Error data",
+            "properties": {
+                "msg": {
+                    "type": "string",
+                    "description": "Error message",
+                    "example": "Record not found"
+                }
+            }
+        },
+        "business_exception": {
+            "type": "array",
+            "description": "Error array",
+            "items": {
+                "$ref": "#/definitions/error"
+            }
+        }
+    }
+}
