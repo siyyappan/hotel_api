@@ -213,7 +213,7 @@
                 "distance": {
                     "type": "number",
                     "description": "Distance in km",
-                    "example": 1
+                    "example": 100
                 }
             },
             "xml": {
